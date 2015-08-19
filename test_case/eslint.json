@@ -19,10 +19,7 @@
 		"semi": [
 			2,
 			"always"
-		],
-	},
-	"globals": {
-		"print": true
+		]
 	},
 	"env": {
 		"es6": true,

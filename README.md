@@ -1,43 +1,39 @@
-# swint-task
-Batch task manager for Swint
+# swint-builder-js
+JavaScript builder for Swint
 
 **Warning: This is not the final draft yet, so do not use this until its official version is launched**
 
 ## Installation
 ```sh
-$ npm install --save swint-task
+$ npm install --save swint-builder-js
 ```
+
+## Options
+* `name` : `String`, default: `Project`
+* `inDir` : `String`, default: `path.dirname(require.main.filename)`
+* `outDir` : `String`, default: `path.join(path.dirname(require.main.filename), '../out')`
+* `lint`
+  * `check` : `Boolean`, default: `true`
+  * `ruleFile` : `String`, default: `path.join(path.dirname(require.main.filename), 'eslint.json')`
+* `minify` : `Boolean`, default: `true`
+* `variables` : `Object`, default: `{}`
+* `walkOption` : `Object`, default: `{ ext: 'js' }`
 
 ## Usage
 ```javascript
-var tasks = [
-		{
-			func: function(option, callback) {
-				// task 1
-				callback(null, true);
-			}
-		},
-		{
-			func: function(option, callback) {
-				// task 2
-				callback(null, option.value); // option.value === 42
-			},
-			option: {
-				value: 42
-			}
-		},
-		{
-			func: function(option, callback) {
-				setTimeout(function() {
-					// task 3
-					callback(null, true);
-				}, 10);
-			}
-		}
-	];
-
-task(tasks, function(err, res) {
-	// task 1, 2, 3 is executed, respectively
+buildJS({
+	name: 'Test',
+	inDir: path.join(__dirname, 'js'),
+	outDir: path.join(__dirname, 'out'),
+	lint: {
+		check: true,
+		ruleFile: path.join(__dirname, 'js/eslint.json')
+	},
+	minify: true,
+	variables: {
+		tmplVar: 'A'
+	}
+}, function() {
+	// Build complete
 });
-
 ```
