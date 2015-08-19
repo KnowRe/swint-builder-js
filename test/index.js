@@ -11,10 +11,6 @@ describe('builder-js', function() {
 			name: 'Test',
 			inDir: path.join(__dirname, '../test_case'),
 			outDir: os.tmpdir(),
-			lint: {
-				check: true,
-				ruleFile: path.join(__dirname, '../test_case/eslint.json')
-			},
 			minify: true,
 			variables: {
 				tmplVar: 'A'
