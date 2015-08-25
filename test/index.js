@@ -6,7 +6,22 @@ var os = require('os'),
 	buildJS = require('../lib');
 
 describe('builder-js', function() {
-	it('Simple case', function(done) {
+	it('Error when no callback', function() {
+		assert.throws(function() {
+			buildJS({});
+		});
+	});
+
+	it('Error when inDir doesn\'t exist', function(done) {
+		buildJS({
+			inDir: '/this-directory-does-not-exist'
+		}, function(err, res) {
+			assert.notEqual(err, null);
+			done();
+		});
+	});
+
+	it('Common case', function(done) {
 		buildJS({
 			name: 'Test',
 			inDir: path.join(__dirname, '../test_case'),
@@ -20,8 +35,7 @@ describe('builder-js', function() {
 
 			assert.equal(
 				file,
-			 	"(function(window) {\n\nvar namespace = {};\nnamespace.class1 = function() {\n\tthis.foo = 'bar';\n};\n\
-namespace.class2 = function() {\n\n\tthis.foo = 'bar';\n\n};\n})(window);\n"
+				fs.readFileSync(path.join(__dirname, '../test_result/common.js'))
 			);
 			done();
 		});
