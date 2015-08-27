@@ -40,4 +40,10 @@ describe('builder-js', function() {
 			done();
 		});
 	});
+
+	after(function() {
+		fs.unlinkSync(path.join(os.tmpdir(), 'Test.js'));
+		fs.unlinkSync(path.join(os.tmpdir(), 'Test.min.js'));
+		fs.unlinkSync(path.join(os.tmpdir(), 'Test.min.js.map'));
+	});
 });
