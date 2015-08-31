@@ -25,25 +25,35 @@ describe('builder-js', function() {
 		buildJS({
 			name: 'Test',
 			inDir: path.join(__dirname, '../test_case'),
-			outDir: os.tmpdir(),
+			outDir: path.join(os.tmpdir(), 'swint-builder-js-out'),
 			minify: true,
 			variables: {
 				tmplVar: 'A'
 			}
 		}, function(err, res) {
-			var file = fs.readFileSync(path.join(os.tmpdir(), 'Test.js'), { encoding: 'utf8' });
-
-			assert.equal(
-				file,
+			assert.deepEqual(
+				fs.readFileSync(path.join(os.tmpdir(), 'swint-builder-js-out/Test.js')),
 				fs.readFileSync(path.join(__dirname, '../test_result/common.js'))
 			);
+
+			assert.deepEqual(
+				fs.readFileSync(path.join(os.tmpdir(), 'swint-builder-js-out/Test.min.js')),
+				fs.readFileSync(path.join(__dirname, '../test_result/common.min.js'))
+			);
+
+			assert.deepEqual(
+				fs.readFileSync(path.join(os.tmpdir(), 'swint-builder-js-out/Test.min.js.map')),
+				fs.readFileSync(path.join(__dirname, '../test_result/common.min.js.map'))
+			);
+
 			done();
 		});
 	});
 
 	after(function() {
-		fs.unlinkSync(path.join(os.tmpdir(), 'Test.js'));
-		fs.unlinkSync(path.join(os.tmpdir(), 'Test.min.js'));
-		fs.unlinkSync(path.join(os.tmpdir(), 'Test.min.js.map'));
+		fs.unlinkSync(path.join(os.tmpdir(), 'swint-builder-js-out/Test.js'));
+		fs.unlinkSync(path.join(os.tmpdir(), 'swint-builder-js-out/Test.min.js'));
+		fs.unlinkSync(path.join(os.tmpdir(), 'swint-builder-js-out/Test.min.js.map'));
+		fs.rmdirSync(path.join(os.tmpdir(), 'swint-builder-js-out'));
 	});
 });
