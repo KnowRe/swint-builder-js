@@ -44,8 +44,8 @@ describe('builder-js', function() {
 			);
 
 			assert.deepEqual(
-				fs.readFileSync(path.join(os.tmpdir(), 'swint-builder-js-out/Test.min.js.map'), 'utf-8'),
-				fs.readFileSync(path.join(__dirname, '../test_result/common.min.js.map'), 'utf-8')
+				JSON.parse(fs.readFileSync(path.join(os.tmpdir(), 'swint-builder-js-out/Test.min.js.map'), 'utf-8')),
+				JSON.parse(fs.readFileSync(path.join(__dirname, '../test_result/common.min.js.map'), 'utf-8'))
 			);
 
 			done();
