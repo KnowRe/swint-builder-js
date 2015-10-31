@@ -34,18 +34,18 @@ describe('builder-js', function() {
 			}
 		}, function(err, res) {
 			assert.deepEqual(
-				fs.readFileSync(path.join(os.tmpdir(), 'swint-builder-js-out/Test.js')),
-				fs.readFileSync(path.join(__dirname, '../test_result/common.js'))
+				fs.readFileSync(path.join(os.tmpdir(), 'swint-builder-js-out/Test.js'), 'utf-8'),
+				fs.readFileSync(path.join(__dirname, '../test_result/common.js'), 'utf-8')
 			);
 
 			assert.deepEqual(
-				fs.readFileSync(path.join(os.tmpdir(), 'swint-builder-js-out/Test.min.js')),
-				fs.readFileSync(path.join(__dirname, '../test_result/common.min.js'))
+				fs.readFileSync(path.join(os.tmpdir(), 'swint-builder-js-out/Test.min.js'), 'utf-8'),
+				fs.readFileSync(path.join(__dirname, '../test_result/common.min.js'), 'utf-8')
 			);
 
 			assert.deepEqual(
-				fs.readFileSync(path.join(os.tmpdir(), 'swint-builder-js-out/Test.min.js.map')),
-				fs.readFileSync(path.join(__dirname, '../test_result/common.min.js.map'))
+				fs.readFileSync(path.join(os.tmpdir(), 'swint-builder-js-out/Test.min.js.map'), 'utf-8'),
+				fs.readFileSync(path.join(__dirname, '../test_result/common.min.js.map'), 'utf-8')
 			);
 
 			done();
