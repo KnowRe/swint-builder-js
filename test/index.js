@@ -52,6 +52,27 @@ describe('builder-js', function() {
 		});
 	});
 
+	it('Linting', function(done) {
+		buildJS({
+			name: 'Test',
+			inDir: path.join(__dirname, '../test_case'),
+			outDir: path.join(os.tmpdir(), 'swint-builder-js-out'),
+			minify: true,
+			lint: {
+				ruleFile: path.join(__dirname, '../test_case/eslint.json')
+			},
+			variables: {
+				tmplVar: 'A'
+			}
+		}, function(err, res) {
+			assert.equal(res.length, 3);
+			assert.deepEqual(res.map(function(e) {
+				return e.line;
+			}), [3, 4, 7]);
+			done();
+		});
+	});
+
 	after(function() {
 		fs.unlinkSync(path.join(os.tmpdir(), 'swint-builder-js-out/Test.js'));
 		fs.unlinkSync(path.join(os.tmpdir(), 'swint-builder-js-out/Test.min.js'));
