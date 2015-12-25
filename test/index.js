@@ -29,6 +29,9 @@ describe('builder-js', function() {
 			inDir: path.join(__dirname, '../test_case'),
 			outDir: path.join(os.tmpdir(), 'swint-builder-js-out'),
 			minify: true,
+			lint: {
+				check: false
+			},
 			variables: {
 				tmplVar: 'A'
 			}
@@ -59,16 +62,16 @@ describe('builder-js', function() {
 			outDir: path.join(os.tmpdir(), 'swint-builder-js-out'),
 			minify: true,
 			lint: {
-				ruleFile: path.join(__dirname, '../test_case/eslint.json')
+				options: {
+					configFile: path.join(__dirname, '../test_case/.eslintrc'),
+					ignorePath: path.join(__dirname, '../test_case/.eslintignore')
+				}
 			},
 			variables: {
 				tmplVar: 'A'
 			}
 		}, function(err, res) {
-			assert.equal(res.length, 3);
-			assert.deepEqual(res.map(function(e) {
-				return e.line;
-			}), [3, 4, 7]);
+			assert.equal(res.errorCount, 1);
 			done();
 		});
 	});

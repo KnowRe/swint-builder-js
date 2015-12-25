@@ -1,7 +1,9 @@
+/* global namespace */
+
 namespace.class2 = function() {
-<% if(tmplVar === 'A') { %>
+/*! <% if(tmplVar === 'A') { %> */
 	this.foo = 'bar';
-<% } else if(tmplVal === 'B') { %>
+/*! <% } else if(tmplVal === 'B') { %> */
 	this.foo = 'baz';
-<% } %>
+/*! <% } %> */
 };
