@@ -22,11 +22,14 @@
   "bugs": {
     "url": "https://github.com/KnowRe/swint-builder-js/issues"
   },
+  "engines": {
+    "node": ">=4.0.0"
+  },
   "homepage": "https://github.com/KnowRe/swint-builder-js",
   "dependencies": {
     "ejs": "^2.3.3",
     "sprintf": "^0.1.5",
-    "swint-helper": "^0.1.4",
+    "swint-helper": "1.x",
     "uglify-js": "^2.4.24",
     "eslint": "^1.2.0"
   },
