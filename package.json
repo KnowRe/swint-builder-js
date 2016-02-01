@@ -27,14 +27,14 @@
   },
   "homepage": "https://github.com/KnowRe/swint-builder-js",
   "dependencies": {
-    "ejs": "^2.3.3",
+    "ejs": "^2.4.1",
     "sprintf": "^0.1.5",
     "swint-helper": "1.x",
-    "uglify-js": "^2.4.24",
+    "uglify-js": "^2.6.1",
     "eslint": "^1.2.0"
   },
   "devDependencies": {
-    "eslint": "*",
-    "mocha": "*"
+    "mocha": "^2.4.5",
+    "eslint": "^1.10.3"
   }
 }
