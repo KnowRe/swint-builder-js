@@ -31,10 +31,10 @@
     "sprintf": "^0.1.5",
     "swint-helper": "1.x",
     "uglify-js": "^2.6.1",
-    "eslint": "^1.2.0"
+    "eslint": "^2.2.0"
   },
   "devDependencies": {
     "mocha": "^2.4.5",
-    "eslint": "^1.10.3"
+    "eslint": "^2.2.0"
   }
 }

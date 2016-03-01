@@ -20,9 +20,12 @@
 			2,
 			"always"
 		],
-		"space-after-keywords": [
+		"keyword-spacing": [
 			2,
-			"never"
+			{
+				"before": true,
+				"after": true
+			}
 		],
 		"space-before-blocks": [
 			2,
@@ -34,12 +37,11 @@
 		]
 	},
 	"globals": {
-		"print": true,
-		"glesea": true
+		"print": true
 	},
 	"env": {
 		"es6": true,
-		"browser": true
+		"node": true
 	},
 	"plugins": [
 	],
