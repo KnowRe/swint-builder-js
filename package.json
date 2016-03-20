@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/KnowRe/swint-builder-js.git"
+    "url": "https://github.com/KnowRe-Dev/swint-builder-js.git"
   },
   "keywords": [
     "swint",
@@ -20,12 +20,12 @@
   "contributors": [],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/KnowRe/swint-builder-js/issues"
+    "url": "https://github.com/KnowRe-Dev/swint-builder-js/issues"
   },
   "engines": {
     "node": ">=4.0.0"
   },
-  "homepage": "https://github.com/KnowRe/swint-builder-js",
+  "homepage": "https://github.com/KnowRe-Dev/swint-builder-js",
   "dependencies": {
     "ejs": "^2.4.1",
     "sprintf": "^0.1.5",
