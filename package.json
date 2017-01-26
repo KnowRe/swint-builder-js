@@ -1,6 +1,6 @@
 {
   "name": "swint-builder-js",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "JavaScript builder for Swint",
   "main": "lib/index.js",
   "scripts": {
