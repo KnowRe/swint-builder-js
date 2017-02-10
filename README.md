@@ -16,6 +16,7 @@ $ npm install --save swint-builder-js
   * `check` : `Boolean`, default: `true`
   * `ruleFile` : `String`, default: `path.join(path.dirname(require.main.filename), 'eslint.json')`
 * `minify` : `Boolean`, default: `true`
+* `useSourceMap` : `Boolean`, default: `true`
 * `variables` : `Object`, default: `{}`
 * `walkOption` : `Object`, default: `{ ext: 'js' }`
 
@@ -30,6 +31,7 @@ buildJS({
 		ruleFile: path.join(__dirname, 'js/eslint.json')
 	},
 	minify: true,
+	useSourceMap: true,
 	variables: {
 		tmplVar: 'A'
 	}
