@@ -1,4 +1,6 @@
 # swint-builder-js
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/Knowre-Dev/swint-builder-js.svg)](https://greenkeeper.io/)
 JavaScript builder for Swint. Walks a directory and concatenates the file on a certain order.
 
 **Warning: This is not the final draft yet, so do not use this until its official version is launched**
