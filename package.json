@@ -30,11 +30,11 @@
     "ejs": "2.5.6",
     "sprintf": "0.1.5",
     "swint-helper": "1.2.4",
-    "uglify-js": "3.0.6",
+    "uglify-js": "3.0.15",
     "eslint": "3.19.0"
   },
   "devDependencies": {
-    "mocha": "3.4.1",
+    "mocha": "3.4.2",
     "eslint": "3.19.0"
   }
 }
