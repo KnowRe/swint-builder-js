@@ -71,6 +71,8 @@ describe('builder-js', function() {
 				tmplVar: 'A'
 			}
 		}, function(err, res) {
+			console.log(res.results[0].messages);
+			console.log(res.results[1].messages);
 			assert.equal(res.errorCount, 1);
 			done();
 		});
