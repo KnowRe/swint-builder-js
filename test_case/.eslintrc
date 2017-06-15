@@ -1,6 +1,7 @@
 {
 	"rules": {
-		"indent": [
+		"indent": "off",
+		"indent-legacy": [
 			2,
 			"tab",
 			{
