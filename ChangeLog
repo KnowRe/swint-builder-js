@@ -1,3 +1,7 @@
+2017.07.24, Version 1.0.11
+ * Upgrade: Upgraded node version & dependencies
+ * Fix: modify test result mapping
+
 2017.06.15, Version 1.0.10
  * Upgrade: Upgraded node version & dependencies
  * Fix: apply eslint 4.0.0 (.eslintrc)
