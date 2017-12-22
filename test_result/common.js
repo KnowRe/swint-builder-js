@@ -1,16 +1,20 @@
-(function(window) {
+"use strict";
 
-var namespace = {};
-/* global namespace */
+(function (window) {
 
-namespace.class1 = function() {
-	this.foo = "bar";
-};
-/* global namespace */
+	var namespace = {};
 
-namespace.class2 = function() {
-/*!  */
-	this.foo = 'bar';
-/*!  */
-};
+	/* global namespace */
+
+	namespace.class1 = function () {
+		this.foo = "bar";
+	};
+
+	/* global namespace */
+
+	namespace.class2 = function () {
+		/*!  */
+		this.foo = 'bar';
+		/*!  */
+	};
 })(window);

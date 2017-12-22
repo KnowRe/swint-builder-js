@@ -1,33 +1,37 @@
-var os = require('os'),
-	fs = require('fs'),
-	path = require('path'),
-	assert = require('assert'),
-	swintHelper = require('swint-helper'),
-	buildJS = require('../lib');
+/* global describe, it, after */
+
+const os = require('os');
+const fs = require('fs');
+const path = require('path');
+const assert = require('assert');
+
+require('swint-helper');
+
+const build = require('../lib');
 
 global.swintVar.printLevel = 5;
 
-describe('builder-js', function() {
-	it('Error when no callback', function() {
-		assert.throws(function() {
-			buildJS({});
-		});
+describe('builder-js', () => {
+	const tmpdir = os.tmpdir();
+
+	it('Error when no callback', done => {
+		build().catch(() => done());
 	});
 
-	it('Error when inDir doesn\'t exist', function(done) {
-		buildJS({
+	it('Error when inDir doesn\'t exist', done => {
+		build({
 			inDir: '/this-directory-does-not-exist'
-		}, function(err, res) {
-			assert.notEqual(err, null);
+		}, () => {}).catch(error => {
+			assert.notEqual(error, null);
 			done();
 		});
 	});
 
-	it('Common case', function(done) {
-		buildJS({
+	it('Common case', done => {
+		build({
 			name: 'Test',
 			inDir: path.join(__dirname, '../test_case'),
-			outDir: path.join(os.tmpdir(), 'swint-builder-js-out'),
+			outDir: path.join(tmpdir, 'swint-builder-js-out'),
 			minify: true,
 			lint: {
 				check: false
@@ -35,33 +39,34 @@ describe('builder-js', function() {
 			variables: {
 				tmplVar: 'A'
 			}
-		}, function(err, res) {
+		}, () => {}).then(() => {
 			assert.deepEqual(
-				fs.readFileSync(path.join(os.tmpdir(), 'swint-builder-js-out/Test.js'), 'utf-8'),
+				fs.readFileSync(path.join(tmpdir, 'swint-builder-js-out/Test.js'), 'utf-8'),
 				fs.readFileSync(path.join(__dirname, '../test_result/common.js'), 'utf-8')
 			);
 
 			assert.deepEqual(
-				fs.readFileSync(path.join(os.tmpdir(), 'swint-builder-js-out/Test.min.js'), 'utf-8'),
+				fs.readFileSync(path.join(tmpdir, 'swint-builder-js-out/Test.min.js'), 'utf-8'),
 				fs.readFileSync(path.join(__dirname, '../test_result/common.min.js'), 'utf-8')
 			);
 
 			assert.deepEqual(
-				JSON.parse(fs.readFileSync(path.join(os.tmpdir(), 'swint-builder-js-out/Test.min.js.map'), 'utf-8')),
-				JSON.parse(fs.readFileSync(path.join(__dirname, '../test_result/common.min.js.map'), 'utf-8'))
+				fs.readFileSync(path.join(tmpdir, 'swint-builder-js-out/Test.min.js.map'), 'utf-8'),
+				fs.readFileSync(path.join(__dirname, '../test_result/common.min.js.map'), 'utf-8')
 			);
 
 			done();
 		});
 	});
 
-	it('Linting', function(done) {
-		buildJS({
+	it('Linting', done => {
+		build({
 			name: 'Test',
 			inDir: path.join(__dirname, '../test_case'),
 			outDir: path.join(os.tmpdir(), 'swint-builder-js-out'),
 			minify: true,
 			lint: {
+				check: true,
 				options: {
 					configFile: path.join(__dirname, '../test_case/.eslintrc'),
 					ignorePath: path.join(__dirname, '../test_case/.eslintignore')
@@ -70,19 +75,22 @@ describe('builder-js', function() {
 			variables: {
 				tmplVar: 'A'
 			}
-		}, function(err, res) {
-			console.log(res.results[0].messages);
-			console.log(res.results[1].messages);
-			assert.equal(res.errorCount, 1);
+		}, () => {}).catch(({
+			report
+		}) => {
+			// console.log(report.results[0].messages);
+			// console.log(report.results[1].messages);
+
+			assert.equal(report.errorCount, 1);
 			done();
 		});
 	});
 
-	it('Minified (useSourceMap: false) case', function(done) {
-		buildJS({
+	it('Minified (useSourceMap: false) case', done => {
+		build({
 			name: 'Test',
 			inDir: path.join(__dirname, '../test_case'),
-			outDir: path.join(os.tmpdir(), 'swint-builder-js-out2'),
+			outDir: path.join(tmpdir, 'swint-builder-js-out2'),
 			minify: true,
 			lint: {
 				check: false
@@ -91,14 +99,14 @@ describe('builder-js', function() {
 			variables: {
 				tmplVar: 'A'
 			}
-		}, function(err, res) {
+		}, () => {}).then(() => {
 			assert.deepEqual(
-				fs.readFileSync(path.join(os.tmpdir(), 'swint-builder-js-out2/Test.js'), 'utf-8'),
+				fs.readFileSync(path.join(tmpdir, 'swint-builder-js-out2/Test.js'), 'utf-8'),
 				fs.readFileSync(path.join(__dirname, '../test_result/common.js'), 'utf-8')
 			);
 
 			assert.deepEqual(
-				fs.readFileSync(path.join(os.tmpdir(), 'swint-builder-js-out2/Test.min.js'), 'utf-8'),
+				fs.readFileSync(path.join(tmpdir, 'swint-builder-js-out2/Test.min.js'), 'utf-8'),
 				fs.readFileSync(path.join(__dirname, '../test_result/common2.min.js'), 'utf-8')
 			);
 
@@ -106,14 +114,15 @@ describe('builder-js', function() {
 		});
 	});
 
-	after(function() {
-		fs.unlinkSync(path.join(os.tmpdir(), 'swint-builder-js-out/Test.js'));
-		fs.unlinkSync(path.join(os.tmpdir(), 'swint-builder-js-out/Test.min.js'));
-		fs.unlinkSync(path.join(os.tmpdir(), 'swint-builder-js-out/Test.min.js.map'));
-		fs.rmdirSync(path.join(os.tmpdir(), 'swint-builder-js-out'));
+	after(() => {
+		fs.unlinkSync(path.join(tmpdir, 'swint-builder-js-out/Test.js'));
+		fs.unlinkSync(path.join(tmpdir, 'swint-builder-js-out/Test.js.map'));
+		fs.unlinkSync(path.join(tmpdir, 'swint-builder-js-out/Test.min.js'));
+		fs.unlinkSync(path.join(tmpdir, 'swint-builder-js-out/Test.min.js.map'));
+		fs.rmdirSync(path.join(tmpdir, 'swint-builder-js-out'));
 
-		fs.unlinkSync(path.join(os.tmpdir(), 'swint-builder-js-out2/Test.js'));
-		fs.unlinkSync(path.join(os.tmpdir(), 'swint-builder-js-out2/Test.min.js'));
-		fs.rmdirSync(path.join(os.tmpdir(), 'swint-builder-js-out2'));
+		fs.unlinkSync(path.join(tmpdir, 'swint-builder-js-out2/Test.js'));
+		fs.unlinkSync(path.join(tmpdir, 'swint-builder-js-out2/Test.min.js'));
+		fs.rmdirSync(path.join(tmpdir, 'swint-builder-js-out2'));
 	});
 });
