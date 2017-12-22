@@ -14,7 +14,13 @@
     },
     "license": "MIT",
     "author": "Kurt Cho <kivoloid@gmail.com>",
-    "contributors": [],
+    "contributors": [
+        {
+            "name": "Yongbin Min",
+            "email": "contact@cichol.com",
+            "url": "https://www.cichol.com/"
+        }
+    ],
     "main": "lib/index.js",
     "directories": {
         "lib": "lib",
@@ -42,12 +48,11 @@
         "eslint": "^4.12.1",
         "eslint-config-airbnb-base": "^12.1.0",
         "eslint-plugin-import": "^2.8.0",
-        "glob": "^7.1.2"
+        "swint-helper": "^1.2.8"
     },
     "devDependencies": {
         "babel-eslint": "^8.0.3",
-        "mocha": "4.0.1",
-        "swint-helper": "^1.2.8"
+        "mocha": "4.0.1"
     },
     "engines": {
         "node": ">=8.9.3",

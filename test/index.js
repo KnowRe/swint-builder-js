@@ -18,16 +18,15 @@ describe('builder-js', () => {
 		build().catch(() => done());
 	});
 
-	it('Error when inDir doesn\'t exist', done => {
+	it('Error when inDir doesn\'t exist', () => (
 		build({
 			inDir: '/this-directory-does-not-exist'
-		}, () => {}).catch(error => {
+		}, () => { }).catch(error => {
 			assert.notEqual(error, null);
-			done();
-		});
-	});
+		})
+	));
 
-	it('Common case', done => {
+	it('Common case', () => (
 		build({
 			name: 'Test',
 			inDir: path.join(__dirname, '../test_case'),
@@ -39,7 +38,7 @@ describe('builder-js', () => {
 			variables: {
 				tmplVar: 'A'
 			}
-		}, () => {}).then(() => {
+		}, () => { }).then(() => {
 			assert.deepEqual(
 				fs.readFileSync(path.join(tmpdir, 'swint-builder-js-out/Test.js'), 'utf-8'),
 				fs.readFileSync(path.join(__dirname, '../test_result/common.js'), 'utf-8')
@@ -54,12 +53,10 @@ describe('builder-js', () => {
 				fs.readFileSync(path.join(tmpdir, 'swint-builder-js-out/Test.min.js.map'), 'utf-8'),
 				fs.readFileSync(path.join(__dirname, '../test_result/common.min.js.map'), 'utf-8')
 			);
+		})
+	));
 
-			done();
-		});
-	});
-
-	it('Linting', done => {
+	it('Linting', () => (
 		build({
 			name: 'Test',
 			inDir: path.join(__dirname, '../test_case'),
@@ -78,15 +75,11 @@ describe('builder-js', () => {
 		}, () => {}).catch(({
 			report
 		}) => {
-			// console.log(report.results[0].messages);
-			// console.log(report.results[1].messages);
-
 			assert.equal(report.errorCount, 1);
-			done();
-		});
-	});
+		})
+	));
 
-	it('Minified (useSourceMap: false) case', done => {
+	it('Minified (useSourceMap: false) case', () => (
 		build({
 			name: 'Test',
 			inDir: path.join(__dirname, '../test_case'),
@@ -99,7 +92,7 @@ describe('builder-js', () => {
 			variables: {
 				tmplVar: 'A'
 			}
-		}, () => {}).then(() => {
+		}, () => { }).then(() => {
 			assert.deepEqual(
 				fs.readFileSync(path.join(tmpdir, 'swint-builder-js-out2/Test.js'), 'utf-8'),
 				fs.readFileSync(path.join(__dirname, '../test_result/common.js'), 'utf-8')
@@ -109,10 +102,8 @@ describe('builder-js', () => {
 				fs.readFileSync(path.join(tmpdir, 'swint-builder-js-out2/Test.min.js'), 'utf-8'),
 				fs.readFileSync(path.join(__dirname, '../test_result/common2.min.js'), 'utf-8')
 			);
-
-			done();
-		});
-	});
+		})
+	));
 
 	after(() => {
 		fs.unlinkSync(path.join(tmpdir, 'swint-builder-js-out/Test.js'));
