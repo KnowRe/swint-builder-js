@@ -1,3 +1,9 @@
+2019.03.05, Version 1.0.14
+ * Update : travis deploy secure-key
+ * Update: update minified option
+ * Upgrade: Upgraded node version & dependencies
+ * Fix: modify test result mapping (Fixes UglifyJS2 mapping bug)
+
 2017.12.05, Version 1.0.13
  * Upgrade: Upgraded node version & dependencies
 
